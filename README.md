@@ -11,7 +11,7 @@ To solve this problem, in this work, we design Eunomia, a novel distributed stre
 
 
 ## Design
-
+![](Architecture.png)
 Eunomia is consists of four components: *joiner*, *dispatcher*, *controller*, and *monitor*. The *joiner* is a key component in the system which constructs all join units as an ordered propagation model. Meanwhile, the *joiner* is responsible for performing the join operation. The *dispatcher* dispatches tuples from data sources to the *joiner*. The *controller* decides the structure of the ordered propagation model based on the actual workloads in the system. The *joiner* adjusts the structure of the model based on the configuration information from the *controller*. The *monitor* collects the workload statistics from each join unit and transfers the information to *controller* in real time.
 
 The key design of Eunomia is the ordered propagation model which consists of dispatchers and joiners. The model organizes joiners to an *m-ary* tree structure, where *m* is the degree of all the nodes in the tree structure.  Tuples transmitted from dispatchers arrive at the root joiners of the structure. The root joiners process tuples and forward them to its child joiners, and the same is true for the procedure in child joiners. Therefore, tuples are broadcast to all joiners and processed in each joiner.
@@ -19,7 +19,7 @@ The key design of Eunomia is the ordered propagation model which consists of dis
 
 ## How to build and run？
 ### Environment
-We implement Eunomia atop Apache Storm (version 1.2.2), and deploy the system on a cluster. Each machine is equipped with an octa-core 2.4GHz Xeon CPU, 64.0GB RAM, and a 1000Mbps Ethernet interface card. One machine in the cluster serves as the master node to host the Storm Nimbus. The other machines run Storm supervisors.
+We implement Eunomia atop [Apache Storm](http://storm.apache.org/2018/06/04/storm122-released.html) (version 1.2.2), and deploy the system on a cluster. Each machine is equipped with an octa-core 2.4GHz Xeon CPU, 64.0GB RAM, and a 1000Mbps Ethernet interface card. One machine in the cluster serves as the master node to host the Storm Nimbus. The other machines run Storm supervisors.
 
 ### Build
 We construct the project of Eunomia by Maven(<https://maven.apache.org/>). 
@@ -42,7 +42,7 @@ If you want to know more detailed information, please refer to this paper:
 
 Jie Yuan, Yonghui Wang, Hanhua Chen, Hai Jin, Haikun Liu. "Eunomia: Efficiently Eliminating Abnormal Resultsin Distributed Stream Join Systems" in Proceedings of 29th IEEE/ACM International Symposium on Quality of Service (IWQoS), 2021.
 
-##Authors and Copyright
+## Authors and Copyright
 Eunomia is developed in National Engineering Research Center for Big Data Technology and System, Cluster and Grid Computing Lab, Services Computing Technology and System Lab, School of Computer Science and Technology, Huazhong University of Science and Technology, Wuhan, China by Jie Yuan(<jieyuan@hust.edu.cn>), Yonghui Wang(<yhw@hust.edu.cn>), Hanhua Chen(<chen@hust.edu.cn>), Hai Jin(<hjin@hust.edu.cn>), Haikun Liu(<hkliu@hust.edu.cn>).
 
 Copyright (C) 2021, [SCTC & CGCL](http://grid.hust.edu.cn/) and [Huazhong University of Science and Technology](https://www.hust.edu.cn/).
